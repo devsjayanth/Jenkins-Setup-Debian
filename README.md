@@ -134,8 +134,14 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N ""
 
 # View the public key (you'll need this)
 # On Controller: cat ~/.ssh/id_rsa.pub → copy output
+# Public Key:
 cat ~/.ssh/id_rsa.pub
+# Private Key:
+cat ~/.ssh/id_rsa
+
 ```
+Note: We need both public and private keys ( Keep the Key pair safe )
+
 ⚠️Copy public Key from Controller: cat ~/.ssh/id_rsa.pub → copy output, we need this to connect with the worker node.
 
 ### Step 1: Configure Agent Machine (⚠️on Agent Node)
@@ -177,7 +183,7 @@ ssh jenkins@<NODE_HOST>
    - **ID**: `jenkins-agent-ssh`
    - **Description**: `SSH Key for Linux Agent`
    - **Username**: `jenkins`
-   - **Private Key**: Select **"Enter directly"** → **Add** → paste content of `~/.ssh/authorized_keys`
+   - **Private Key**: Select **"Enter directly"** → **Add** → paste Private Key content of `cat ~/.ssh/id_rsa` from the ⚠️Controller or ( from the machine we created the key pair)
    - **Passphrase**: (leave empty if you didn't set one)
 3. Click **Create**
 
