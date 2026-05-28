@@ -140,12 +140,7 @@ cat ~/.ssh/id_rsa.pub
 
 ### Step 1: Configure Agent Machine (⚠️on Agent Node)
 
-```bash
-#Java 21 installed
-sudo apt install openjdk-21-jre
 ```
-```
-
 # On the AGENT machine, create jenkins user
 sudo useradd -m -s /bin/bash jenkins
 
