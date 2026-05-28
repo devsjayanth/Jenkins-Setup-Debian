@@ -135,15 +135,21 @@ http://<your-debian13-ip>:8080
 - Java 21 installed (`sudo apt install openjdk-21-jre`)
 - SSH server running and accessible from controller
 - Dedicated user for Jenkins (recommended: `jenkins`)
+### Log in to the Jenkins Controller server as the jenkins user:
+```
+# Switch to jenkins user (if you're root/admin)
+sudo su - jenkins
+```
 
-### Step 1: Prepare SSH Key Pair (on Controller)
+### Step 1: Prepare SSH Key Pair (⚠️on Controller)
 
 ```bash
 # Generate SSH key for Jenkins agent communication
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/jenkins_agent_key -N ""
 
 # View the public key (you'll need this)
-cat ~/.ssh/jenkins_agent_key.pub
+# On Controller: cat ~/.ssh/id_rsa.pub → copy output
+cat ~/.ssh/id_rsa.pub
 ```
 
 ### Step 2: Configure Agent Machine
@@ -152,9 +158,16 @@ cat ~/.ssh/jenkins_agent_key.pub
 # On the AGENT machine, create jenkins user
 sudo useradd -m -s /bin/bash jenkins
 
-# Add controller's public key to agent's authorized_keys
-# (Replace with your actual public key content)
-echo "ssh-rsa AAAAB3NzaC1yc2EAAA... jenkins-agent" | sudo tee -a /home/jenkins/.ssh/authorized_keys
+```
+### Log in to the Jenkins Controller server as the jenkins user:
+```
+# Switch to jenkins user (if you're root/admin)
+sudo su - jenkins
+```
+On Controller: cat ~/.ssh/id_rsa.pub → copy output
+```
+mkdir -p ~/.ssh
+echo "<PASTE_PUBLIC_KEY>" >> ~/.ssh/authorized_keys
 
 # Set proper permissions
 sudo chmod 700 /home/jenkins/.ssh
@@ -165,7 +178,11 @@ sudo chown -R jenkins:jenkins /home/jenkins/.ssh
 sudo apt update && sudo apt install openjdk-21-jre -y
 java -version  # Verify
 ```
-
+Verify Passwordless SSH
+Test the connection from the Controller:
+```
+ssh jenkins@<NODE_HOST>
+```
 ### Step 3: Add SSH Credential in Jenkins
 
 1. In Jenkins UI: **Manage Jenkins** → **Credentials** → **System** → **Global credentials** → **Add Credentials**
@@ -174,7 +191,7 @@ java -version  # Verify
    - **ID**: `jenkins-agent-ssh`
    - **Description**: `SSH Key for Linux Agent`
    - **Username**: `jenkins`
-   - **Private Key**: Select **"Enter directly"** → **Add** → paste content of `~/.ssh/jenkins_agent_key`
+   - **Private Key**: Select **"Enter directly"** → **Add** → paste content of `~/.ssh/authorized_keys`
    - **Passphrase**: (leave empty if you didn't set one)
 3. Click **Create**
 
@@ -287,10 +304,3 @@ sudo systemctl restart jenkins
 ---
 
 ✅ **You now have a fully configured Jenkins LTS controller on Debian 13 with a remote Linux agent ready for distributed builds!** 
-
-Let me know if you need help with:
-- Pipeline configuration
-- Docker agent setup
-- Kubernetes cloud agents
-- Security hardening
-- Backup strategies
