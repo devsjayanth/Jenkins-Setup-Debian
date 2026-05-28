@@ -1,19 +1,4 @@
 # 🧑‍💼Jenkins+Agent Installation for Debian Family. 
----
-
-## 📋 Prerequisites
-
-### Hardware Requirements
-| Requirement | Minimum | Recommended (Small Team) |
-|-------------|---------|-------------------------|
-| RAM | 256 MB | 4 GB+ |
-| Disk Space | 1 GB | 50 GB+ |
-
-### Software Requirements
-- **Java 21 or later** (required)
-- **Debian 13** with `sudo` privileges
-- Web browser for configuration
-- SSH access (for agent setup later)
 
 ---
 
