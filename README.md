@@ -113,7 +113,7 @@ http://<your-debian13-ip>:8080
 
 ---
 
-## 🖥️ Add a Jenkins Agent Machine (Linux via SSH)
+## 👷‍♂️ +Add a Node (Builder/Worker Agent-Linux via SSH)
 
 ### Prerequisites on Agent Machine
 - Linux machine (Debian/Ubuntu/RHEL/CentOS)
