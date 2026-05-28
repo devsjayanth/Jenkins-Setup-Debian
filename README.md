@@ -183,7 +183,7 @@ ssh jenkins@<NODE_HOST>
    - **ID**: `jenkins-agent-ssh`
    - **Description**: `SSH Key for Linux Agent`
    - **Username**: `jenkins`
-   - **Private Key**: Select **"Enter directly"** → **Add** → paste Private Key content of `cat ~/.ssh/id_rsa` from the ⚠️Controller or ( from the machine we created the key pair)
+   - **Private Key**: Select **"Enter directly"** → **Add** → paste ⚠️Private Key content of `cat ~/.ssh/id_rsa` from the Controller or ( from the machine we created the key pair)
    - **Passphrase**: (leave empty if you didn't set one)
 3. Click **Create**
 
