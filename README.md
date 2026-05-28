@@ -137,9 +137,13 @@ sudo useradd -m -s /bin/bash jenkins
 sudo su - jenkins
 ```
 
-### Prepare SSH Key Pair (⚠️on Controller)
+### Prepare SSH Key Pair 
+Node (⚠️on Controller)
 
 ```bash
+# Switch to jenkins user (if you're root/admin)
+sudo su - jenkins
+
 # Generate SSH key for Jenkins agent communication
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/jenkins_agent_key -N ""
 
@@ -147,7 +151,8 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/jenkins_agent_key -N ""
 # On Controller: cat ~/.ssh/id_rsa.pub → copy output
 cat ~/.ssh/id_rsa.pub
 ```
-Copy public Key from Controller: cat ~/.ssh/id_rsa.pub → copy output
+Copy public Key from Controller: cat ~/.ssh/id_rsa.pub → copy output 
+Note: (⚠️on Agent Node)
 ```
 mkdir -p ~/.ssh
 echo "<PASTE_PUBLIC_KEY>" >> ~/.ssh/authorized_keys
