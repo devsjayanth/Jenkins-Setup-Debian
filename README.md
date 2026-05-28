@@ -120,18 +120,7 @@ http://<your-debian13-ip>:8080
 - SSH server running and accessible from controller
 - Dedicated user for Jenkins (recommended: `jenkins`)
 
-
-### Step 1: Configure Agent Machine (⚠️on Agent Node)
-
-```bash
-#Java 21 installed
-sudo apt install openjdk-21-jre
-
-# On the AGENT machine, create jenkins user
-sudo useradd -m -s /bin/bash jenkins
-
-```
-### Log in to the Jenkins Controller server as the jenkins user: Node (⚠️on Controller)
+### Log in to the Jenkins Controller as the jenkins user: Node (⚠️on Controller)
 ```
 # Switch to jenkins user (if you're root/admin)
 sudo su - jenkins
@@ -147,9 +136,26 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N ""
 # On Controller: cat ~/.ssh/id_rsa.pub → copy output
 cat ~/.ssh/id_rsa.pub
 ```
-Copy public Key from Controller: cat ~/.ssh/id_rsa.pub → copy output 
+⚠️Copy public Key from Controller: cat ~/.ssh/id_rsa.pub → copy output, we need this to connect with the worker node.
 
-Note: (⚠️on Agent Node)
+### Step 1: Configure Agent Machine (⚠️on Agent Node)
+
+```bash
+#Java 21 installed
+sudo apt install openjdk-21-jre
+```
+```
+
+# On the AGENT machine, create jenkins user
+sudo useradd -m -s /bin/bash jenkins
+
+```
+```
+# Switch to jenkins user (if you're root/admin)
+sudo su - jenkins
+cd ~
+```
+Paste the Public key we copied from the controller using `cat ~/.ssh/id_rsa.pub → copy output` in `<PASTE_PUBLIC_KEY>`
 ```
 mkdir -p ~/.ssh
 echo "<PASTE_PUBLIC_KEY>" >> ~/.ssh/authorized_keys
