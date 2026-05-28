@@ -121,7 +121,7 @@ http://<your-debian13-ip>:8080
 - Dedicated user for Jenkins (recommended: `jenkins`)
 
 
-### Step 1: Configure Agent Machine
+### Step 1: Configure Agent Machine (⚠️on Agent Node)
 
 ```bash
 #Java 21 installed
@@ -152,6 +152,7 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/jenkins_agent_key -N ""
 cat ~/.ssh/id_rsa.pub
 ```
 Copy public Key from Controller: cat ~/.ssh/id_rsa.pub → copy output 
+
 Note: (⚠️on Agent Node)
 ```
 mkdir -p ~/.ssh
