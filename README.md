@@ -135,6 +135,7 @@ sudo useradd -m -s /bin/bash jenkins
 ```
 # Switch to jenkins user (if you're root/admin)
 sudo su - jenkins
+cd ~
 ```
 Prepare SSH Key Pair 
 
