@@ -132,18 +132,15 @@ sudo useradd -m -s /bin/bash jenkins
 
 ```
 ### Log in to the Jenkins Controller server as the jenkins user:
+
+Node (⚠️on Controller)
 ```
 # Switch to jenkins user (if you're root/admin)
 sudo su - jenkins
 ```
-
-### Prepare SSH Key Pair 
-Node (⚠️on Controller)
+Prepare SSH Key Pair 
 
 ```bash
-# Switch to jenkins user (if you're root/admin)
-sudo su - jenkins
-
 # Generate SSH key for Jenkins agent communication
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/jenkins_agent_key -N ""
 
