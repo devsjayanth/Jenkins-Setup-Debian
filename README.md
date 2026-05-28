@@ -165,7 +165,7 @@ sudo apt update && sudo apt install openjdk-21-jre -y
 java -version  # Verify
 ```
 Verify Passwordless SSH
-Test the connection from the Controller:
+Test the connection from the ⚠️Controller:
 ```
 ssh jenkins@<NODE_HOST>
 ```
