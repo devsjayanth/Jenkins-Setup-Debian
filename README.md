@@ -1,4 +1,4 @@
-# 🧑‍💼🍽️Jenkins LTS Installation Guide for Debian 13
+# 🧑‍💼Jenkins+Agent Installation for Debian Family. 
 ---
 
 ## 📋 Prerequisites
