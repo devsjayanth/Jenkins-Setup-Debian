@@ -113,33 +113,20 @@ http://<your-debian13-ip>:8080
 
 ---
 
-## 🖥️ Part 3: Add a Jenkins Agent Machine (Linux via SSH)
+## 🖥️ Add a Jenkins Agent Machine (Linux via SSH)
 
 ### Prerequisites on Agent Machine
 - Linux machine (Debian/Ubuntu/RHEL/CentOS)
-- Java 21 installed (`sudo apt install openjdk-21-jre`)
 - SSH server running and accessible from controller
 - Dedicated user for Jenkins (recommended: `jenkins`)
-### Log in to the Jenkins Controller server as the jenkins user:
-```
-# Switch to jenkins user (if you're root/admin)
-sudo su - jenkins
-```
 
-### Step 1: Prepare SSH Key Pair (⚠️on Controller)
+
+### Step 1: Configure Agent Machine
 
 ```bash
-# Generate SSH key for Jenkins agent communication
-ssh-keygen -t rsa -b 4096 -f ~/.ssh/jenkins_agent_key -N ""
+#Java 21 installed
+sudo apt install openjdk-21-jre
 
-# View the public key (you'll need this)
-# On Controller: cat ~/.ssh/id_rsa.pub → copy output
-cat ~/.ssh/id_rsa.pub
-```
-
-### Step 2: Configure Agent Machine
-
-```bash
 # On the AGENT machine, create jenkins user
 sudo useradd -m -s /bin/bash jenkins
 
@@ -149,7 +136,18 @@ sudo useradd -m -s /bin/bash jenkins
 # Switch to jenkins user (if you're root/admin)
 sudo su - jenkins
 ```
-On Controller: cat ~/.ssh/id_rsa.pub → copy output
+
+### Prepare SSH Key Pair (⚠️on Controller)
+
+```bash
+# Generate SSH key for Jenkins agent communication
+ssh-keygen -t rsa -b 4096 -f ~/.ssh/jenkins_agent_key -N ""
+
+# View the public key (you'll need this)
+# On Controller: cat ~/.ssh/id_rsa.pub → copy output
+cat ~/.ssh/id_rsa.pub
+```
+Copy public Key from Controller: cat ~/.ssh/id_rsa.pub → copy output
 ```
 mkdir -p ~/.ssh
 echo "<PASTE_PUBLIC_KEY>" >> ~/.ssh/authorized_keys
@@ -168,7 +166,7 @@ Test the connection from the Controller:
 ```
 ssh jenkins@<NODE_HOST>
 ```
-### Step 3: Add SSH Credential in Jenkins
+### Step 2: Add SSH Credential in Jenkins
 
 1. In Jenkins UI: **Manage Jenkins** → **Credentials** → **System** → **Global credentials** → **Add Credentials**
 2. Configure:
@@ -180,7 +178,7 @@ ssh jenkins@<NODE_HOST>
    - **Passphrase**: (leave empty if you didn't set one)
 3. Click **Create**
 
-### Step 4: Create New Agent Node in Jenkins
+### Step 3: Create New Agent Node in Jenkins
 
 1. Navigate to: **Manage Jenkins** → **Nodes** → **New Node**
 2. Configure the agent:
@@ -201,14 +199,14 @@ ssh jenkins@<NODE_HOST>
 
 3. Click **Save**
 
-### Step 5: Launch and Verify Agent
+### Step 4: Launch and Verify Agent
 
 1. In **Nodes** list, click on your new agent (`debian-agent-01`)
 2. Click **Relaunch agent** if status shows "Offline"
 3. Click **Log** to view connection logs
 4. ✅ Success message: `Agent successfully connected and online`
 
-### Step 6: Test Agent Assignment
+### Step 5: Test Agent Assignment
 
 1. Create a new **Freestyle Project**
 2. In **General** section: Check **"Restrict where this project can be run"**
