@@ -141,7 +141,7 @@ Prepare SSH Key Pair
 
 ```bash
 # Generate SSH key for Jenkins agent communication
-ssh-keygen -t rsa -b 4096 -f ~/.ssh/jenkins_agent_key -N ""
+ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N ""
 
 # View the public key (you'll need this)
 # On Controller: cat ~/.ssh/id_rsa.pub → copy output
